@@ -16,43 +16,16 @@
  *   this.next = null;
  * }
  */
-const ListNode = require('../extensions/list-node');
-
-function convertArrayToList(arr) {
-  return arr.reverse().reduce((acc, cur) => {
-    if (acc) {
-      const node = new ListNode(cur);
-      node.next = acc;
-      return node;
-    }
-
-    return new ListNode(cur);
-  }, null);
-}
-
-function removeKFromList(/* l, k */) {
-  throw new Error('Not implemented');
-  let current = l;
-  while(current !== null){
-    console.log(current.value)
-
-    current = current.next;
-  }
-  return l;
-}
-
 function removeKFromList(l, k) {
-  let result = l;
-  while(result !== null){
-    if (result.value === k){
-      result.value = result.next.value;
-      result.next = result.next.next;
+  let buffer = l;
+  while (buffer !== null) {
+    if (buffer.value === k) {
+      buffer.value = buffer.next.value;
+      buffer.next = buffer.next.next;
     }
-    result = result.next;
+    buffer = buffer.next;
   }
   return l;
 }
-
-console.log(removeKFromList(convertArrayToList([3, 1, 2, 3, 4, 5]), 3));
 
 module.exports = removeKFromList;
